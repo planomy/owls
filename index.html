@@ -63,6 +63,8 @@
             <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="7">Activity 7: Facts to Paragraph</button>
             <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="8">Activity 8: Vocab</button>
             <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="9">Activity 9: Punctuation</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="10">Activity 10: Spelling</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="11">Activity 11: Story Pro</button>
         </div>
 
         <!-- Tab Content Panels -->
@@ -223,6 +225,44 @@
                     <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
                         <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
                         <p id="act9-senior" class="text-gray-800 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Activity 10: Spelling -->
+            <div id="tab-panel-10" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">These words are spelled incorrectly. Read the definition and try to write the word with the correct spelling.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <ol id="act10-junior" class="list-decimal list-inside space-y-4 text-gray-800"></ol>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <ol id="act10-senior" class="list-decimal list-inside space-y-4 text-gray-800"></ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 11: Story Pro -->
+            <div id="tab-panel-11" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">Use the topic and the 7 advanced sentence starters below to write the beginning of an exciting story.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-4" id="act11-junior-topic"></h3>
+                        <p class="font-medium text-gray-700 mb-2">Story Starters:</p>
+                        <ul id="act11-junior-starters" class="list-disc list-inside space-y-2 text-gray-800"></ul>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-4" id="act11-senior-topic"></h3>
+                        <p class="font-medium text-gray-700 mb-2">Story Starters:</p>
+                        <ul id="act11-senior-starters" class="list-disc list-inside space-y-2 text-gray-800"></ul>
                     </div>
                 </div>
             </div>
@@ -442,7 +482,7 @@
             ],
             [
                 "<strong>At this</strong> point <strong>in</strong> time, <strong>we do not have</strong> enough information <strong>to make a</strong> decision.",
-                "<strong>The</strong> general consensus <strong>of</strong> opinion <strong>is that the</strong> plan <strong>is a</strong> good one.",
+                "<strong>The</strong> general consensus <strong>of of</strong> opinion <strong>is that the</strong> plan <strong>is a</strong> good one.",
                 "<strong>He was</strong> visible <strong>to the</strong> eye <strong>from a</strong> long distance away."
             ],
             [
@@ -790,7 +830,7 @@
             {
                 topic: "Topic: The fall of the Berlin Wall",
                 facts: [
-                    "For 28 years (1961-1989), the Berlin Wall divided East and West Berlin.",
+                    "For 28 years (1961-1SAM_9_21), the Berlin Wall divided East and West Berlin.",
                     "It was a concrete barrier built by East Germany (GDR).",
                     "Its purpose was to stop East Germans from fleeing to the West.",
                     "The wall symbolized the 'Iron Curtain' of the Cold War.",
@@ -879,6 +919,59 @@
             "mary shelleys 'frankenstein' is a famous gothic novel. A scientist victor frankenstein creates a living being. from old body parts. He is horrified by his creation. and abandons it. The creature is intelligent but lonely. He gets angry at victor. and seeks revenge. The creature says 'I ought to be thy adam but I am rather the fallen angel'",
             "The film 'parasite' from korea won many awards. It tells the story of the kim family. who are very poor. They slowly trick their way into working for the rich park family. The movie is funny at first. but it becomes very dark and violent. It explores themes of class warfare and social inequality. The director is bong joon-ho.",
             "In 'the martian' an astronaut mark watney is left on mars. His crew thinks hes dead after a dust storm. Watney must use science. and his skills to survive. He figures out how to grow potatoes on mars. He says 'im going to have to science the... out of this'. NASA eventually realizes hes alive. and plans a risky rescue mission."
+        ];
+        
+        // --- Activity 10 Data (Spelling) ---
+        const juniorSpelling = [
+            { mis: "becuse", def: "For the reason that.", cor: "because" },
+            { mis: "frend", def: "A person you know well and like.", cor: "friend" },
+            { mis: "peeple", def: "Human beings in general.", cor: "people" },
+            { mis: "whent", def: "Past tense of 'go'.", cor: "went" },
+            { mis: "thay", def: "Used to refer to two or more people or things.", cor: "they" },
+            { mis: "wich", def: "Asking for information about one of many.", cor: "which" },
+            { mis: "skool", def: "A place where children go to learn.", cor: "school" },
+            { mis: "alot", def: "A large number or amount. (Should be two words!)", cor: "a lot" },
+            { mis: "pritty", def: "Pleasant to look at.", cor: "pretty" },
+            { mis: "tomorow", def: "The day after today.", cor: "tomorrow" },
+            { mis: "diffrent", def: "Not the same as another.", cor: "different" },
+            { mis: "familly", def: "A group of parents and children.", cor: "family" },
+            { mis: "suprise", def: "An unexpected event.", cor: "surprise" },
+            { mis: "enuff", def: "As much or as many as required.", cor: "enough" },
+            { mis: "ansur", def: "A reply to a question.", cor: "answer" }
+        ];
+
+        const seniorSpelling = [
+            { mis: "definitly", def: "Without doubt; clearly.", cor: "definitely" },
+            { mis: "seperate", def: "To divide or move apart.", cor: "separate" },
+            { mis: "wierd", def: "Strange or very unusual.", cor: "weird" },
+            { mis: "truely", def: "In a truthful way.", cor: "truly" },
+            { mis: "goverment", def: "The group of people who rule a country.", cor: "government" },
+            { mis: "enviroment", def: "The surroundings or conditions in which a person lives.", cor: "environment" },
+            { mis: "acheive", def: "To successfully reach a goal.", cor: "achieve" },
+            { mis: "neccesary", def: "Required to be done; essential.", cor: "necessary" },
+            { mis: "occured", def: "Happened; took place.", cor: "occurred" },
+            { mis: "proffesional", def: "Relating to a job that needs special skill.", cor: "professional" },
+            { mis: "arguement", def: "A disagreement or discussion.", cor: "argument" },
+            { mis: "concious", def: "Aware of and responding to one's surroundings.", cor: "conscious" },
+            { mis: "garuntee", def: "A promise that something will be true or will happen.", cor: "guarantee" },
+            { mis: "immediatly", def: "At once; instantly.", cor: "immediately" },
+            { mis: "knowlege", def: "Facts, information, and skills acquired through experience.", cor: "knowledge" },
+            { mis: "recomend", def: "To suggest that (someone or something) is good.", cor: "recommend" },
+            { mis: "restaraunt", def: "A place where people pay to sit and eat meals.", cor: "restaurant" },
+            { mis: "tommorow", def: "The day after today.", cor: "tomorrow" }
+        ];
+
+        // --- Activity 11 Data (Story Pro) ---
+        const juniorNarrativeTopics = [
+            "The Chase", "The Secret Door", "The Lost Dog", "The Magic Treehouse", "The Strange Noise", "The Bully", "First Day", "The Treasure Map", "A Big Mistake", "The New Pet", "Locked Out"
+        ];
+        
+        const seniorNarrativeTopics = [
+            "The Escape", "The Rival", "The Discovery", "At Last", "The Long Way Home", "The Betrayal", "Victory", "The Wrong Choice", "The New World", "The Standoff", "The Last Chance"
+        ];
+        
+        const storyProStarters = [
+            "Wiping it away with...", "It was remarkable that...", "Glancing furtively,", "Boldly, she...", "Disappearing once more into...", "The warm light...", "Obviously,", "We wondered when...", "After finally coming back...", "Placing his arms...", "Breathing heavily,", "With an abrupt halt,", "She just lay there and...", "Heavy footsteps echoed...", "Nothing seemed more real than...", "Enjoying the silence, she...", "With a crushed heart,", "There was something strange...", "His greatest desire was to...", "There was no sound but the...", "It was a heavy price...", "Since that moment,", "His mistake was...", "Hissing maliciously,", "After being sent away,", "Thinking it would help, she...", "Few things were more pleasing than...", "The question was obvious:", "Exactly how would it...", "They'd never seen such...", "On the second night,", "Cunningly, we/he/she...", "Laying against the...", "With raised eyebrows,", "With a brief glance,", "With a cold heart, she...", "Retreating apprehensively from...", "Standing unflinchingly, he...", "Opening her eyes, she...", "It didn't shock her that...", "Her eyes travelled...", "It reminded him of...", "It was different because...", "Ashamed, he turned and...", "With a suppressed smile,", "With a whisper, she...", "Admiring the sight, we...", "We afraid that...", "It was more likely that...", "If his intention was...", "It seemed black/white/blue as...", "Calmy, she...", "She hesitated then...", "It was particularly...", "Outside what was normal,", "With a due note of protest,", "Who could say how many...", "With little resistance,", "Watching her face, he...", "Discomfort gripped her when...", "The expectation was...", "With quivering hands,", "After a questioning gaze,", "Forcefully, he was ordered to...", "Beyond ordinary, it...", "It was appreciated when...", "Although he put...", "Of all the sadness,", "The remark deserved...", "Even though he knew...", "With scarcely a word,", "The only reason...", "For a dreadful moment,", "Walking ponderously, he/she...", "It struck her that...", "Its eerie beauty...", "Upon further inspection,", "Nothing ever seemed...", "She constantly felt...", "He looked relieved when...", "His undoing was...", "Simply she commanded,", "Glancing over his shoulder,", "Because of that one decision...", "Though they were from...", "Like everything else...", "The anxiety in her voice...", "With flawless movements she...", "Exuding authority she...", "But as exhausted as he was...", "An unconscious need to...", "By his calculations,", "A black shroud slowly...", "She spoke three words:", "Thinking of the injustice, she...", "Surrendering to the feeling of...", "Hesitating a fraction too long...", "Whole fragments of his memories...", "Pausing, and almost as an afterthought...", "With a soft chime the...", "Whether it was because she spent too long...", "Deteriorating alarmingly,", "He didn't care to be reminded of...", "Her every intonation meant...", "Triggered by...", "Sooner than anticipated...", "Not a moment passed when...", "As beautiful and intimidating as she was,", "Instead of introductions, she...", "Deliberately matching his tone, she...", "Conforming to the status quo,", "Laying aside her hurts,", "Failing to see the logic,", "Ignoring the shake of her head,", "Looking bedraggled,", "Gesturing emphatically,", "Failing to refuse meant...", "He made no comment as...", "Deemed incapable of...", "Victory appeared certain...", "Moving faster than normal,", "Schooled in the art of...", "Devoting several seconds to...", "Sweeping the dust from her mind...", "Sensing tension...", "His thoughts, however, were of...", "His mannerisms revealed...", "The accepted assumption was...", "Walking in the dying twilight...", "A troubling sign appeared when...", "Distinctly lacking any...", "Apparently no one considered...", "The possibility of...", "She busied herself figuring out...", "On the opposite side of...", "Hearing a sudden rustle of...", "Lulled into thinking...", "With her defences down...", "Finally in control of...", "Concerned about his safety...", "His movements were dictated by...", "Disturbed by the vision of...", "Surprised by her presence...", "Expressing disappointment...", "She received preferential treatment because...", "She turned her attention to...", "Wondering what attracted her to...", "A strand of hair slipped...", "At the first station,", "Walking behind a short distance...", "Inside the voices were...", "Somewhere along the darkened...", "Approaching at high speed...", "An instantly familiar face/shape...", "Forced to the ground...", "Confirming the details...", "Regarded as the...", "Late the following afternoon...", "Wearing an unflattering...", "Behaving as well as expected...", "His mood changed dramatically when...", "Mistaken for weakness...", "She had a weakness for three things:", "Unable to believe it,", "With a few hours to kill...", "Decidedly less cordial, her tone...", "With the disappearance of...", "Accompanied by...", "Accepting the inevitable...", "Assuming it would be...", "With a subtle gesture,", "An empty space...", "Besides being better acquainted,", "Blocking the view,", "Debate raged whether...", "Remaining hidden...", "Unpleasant noises disguised...", "Deciding not to...", "Persisting with that train of thought...", "With no need to look further...", "One thing became abundantly clear...", "Pondering the implications of the statement...", "Panicking at the thought...", "It left her one problem,", "Shaped by years of...", "Under pressure from...", "A major setback,", "The closest thing...", "Provoked outbursts always...", "Satisfying nobody,", "Rumours abounded that...", "Greeted with an expression of...", "Dismayed to discover...", "Possessed by a...", "Revealing much of...", "Believed to be a...", "Proved wrong,", "Offered the choice,", "Once a quiet lane way,", "Making no attempt to conceal...", "Admired for her...", "Struggling to comprehend...", "Rarely permitted to...", "Flashing a guarded smile,", "Surrendering helplessly,", "Such an action necessitated...", "While regarded as the most...", "To navigate this maze of emotions...", "What survived of the incident...", "A burst of activity...", "Emphasis lay on...", "Their first meeting ended in circumstances..."
         ];
 
 
@@ -1072,6 +1165,68 @@
             document.getElementById('act9-junior').textContent = (jIndex > -1) ? juniorPunctuationErrors[jIndex] : getRandomItem(juniorPunctuationErrors);
             document.getElementById('act9-senior').textContent = (sIndex > -1) ? seniorPunctuationErrors[sIndex] : getRandomItem(seniorPunctuationErrors);
         }
+        
+        function generateActivity10(index) {
+            let juniorWords;
+            let seniorWords;
+            
+            if (index !== undefined) {
+                juniorWords = [];
+                for (let i = 0; i < 5; i++) {
+                    juniorWords.push(juniorSpelling[(index + i) % juniorSpelling.length]);
+                }
+                seniorWords = [];
+                for (let i = 0; i < 5; i++) {
+                    seniorWords.push(seniorSpelling[(index + i) % seniorSpelling.length]);
+                }
+            } else {
+                juniorWords = getNRandomItems(juniorSpelling, 5);
+                seniorWords = getNRandomItems(seniorSpelling, 5);
+            }
+            
+            document.getElementById('act10-junior').innerHTML = juniorWords.map(word => `
+                <li>
+                    <strong class="text-xl text-red-600">${word.mis}</strong>
+                    <p class="italic text-gray-700">${word.def}</p>
+                </li>
+            `).join('');
+            
+            document.getElementById('act10-senior').innerHTML = seniorWords.map(word => `
+                <li>
+                    <strong class="text-xl text-red-600">${word.mis}</strong>
+                    <p class="italic text-gray-700">${word.def}</p>
+                </li>
+            `).join('');
+        }
+
+        function generateActivity11(index) {
+            let jIndex = (index !== undefined) ? index % juniorNarrativeTopics.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorNarrativeTopics.length : -1;
+
+            document.getElementById('act11-junior-topic').textContent = (jIndex > -1) ? juniorNarrativeTopics[jIndex] : getRandomItem(juniorNarrativeTopics);
+            document.getElementById('act11-senior-topic').textContent = (sIndex > -1) ? seniorNarrativeTopics[sIndex] : getRandomItem(seniorNarrativeTopics);
+
+            let juniorStarters;
+            let seniorStarters;
+
+            if (index !== undefined) {
+                juniorStarters = [];
+                for (let i = 0; i < 7; i++) {
+                    juniorStarters.push(storyProStarters[(index + i) % storyProStarters.length]);
+                }
+                // Offset senior starters
+                seniorStarters = [];
+                for (let i = 0; i < 7; i++) {
+                    seniorStarters.push(storyProStarters[(index + 10 + i) % storyProStarters.length]); // Use a larger offset
+                }
+            } else {
+                juniorStarters = getNRandomItems(storyProStarters, 7);
+                seniorStarters = getNRandomItems(storyProStarters, 7);
+            }
+
+            document.getElementById('act11-junior-starters').innerHTML = juniorStarters.map(s => `<li>${s}</li>`).join('');
+            document.getElementById('act11-senior-starters').innerHTML = seniorStarters.map(s => `<li>${s}</li>`).join('');
+        }
 
         // --- Master Functions ---
 
@@ -1086,6 +1241,8 @@
             generateActivity7(index);
             generateActivity8(index);
             generateActivity9(index);
+            generateActivity10(index);
+            generateActivity11(index);
         }
         
         // Loads completely random content
@@ -1099,6 +1256,8 @@
             generateActivity7(); // No index = random
             generateActivity8(); // No index = random
             generateActivity9(); // No index = random
+            generateActivity10(); // No index = random
+            generateActivity11(); // No index = random
         }
 
         // --- TAB SWITCHING LOGIC ---
@@ -1155,6 +1314,7 @@
                 contentCycleIndex = (contentCycleIndex + 1) % cycleLength; 
                 localStorage.setItem('writingToolCycleIndex', contentCycleIndex);
                 localStorage.setItem('writingToolLastWeek', currentWeekString);
+S
             }
             
             // Load the content for the current cycle
