@@ -44,12 +44,12 @@
     <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         <!-- Header -->
         <div class="p-6 md:p-8 border-b bg-white">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Online Writing Lesson System</h1>
-            <p class="text-lg text-gray-600">Dynamic activities for Junior (Grades 3-6) and Senior (Grades 7-10) students.</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Online Writing Lesson Tool</h1>
+            
             <button id="generate-button" class="mt-4 px-5 py-3 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow">
                 Generate New Random Activities
             </button>
-            <p class="text-sm text-gray-500 mt-2">The page loads a new "Lesson of the Week" automatically. Use this button to override it with a random set.</p>
+            
         </div>
 
         <!-- Tab Buttons -->
@@ -462,8 +462,8 @@
         const seniorStopWords = [
             [
                 "<strong>The</strong> conclusion <strong>that I have come to is that</strong> we need <strong>to</strong> do more research.",
-                "<strong>The</strong> point <strong>of</strong> this essay <strong>is to make an</strong> argument <strong>about the</strong> problem <strong>of</strong> pollution.",
-                "<strong>In point of</strong> fact, <strong>the</strong> data <strong>that was</strong> collected shows <strong>an</strong> increase <strong>of</strong> 10%."
+                "<strong>The</strong> point <strong>of</strong> this essay <strong>is to make an</strong> argument <strong>about the</strong> problem <strong>of of</strong> pollution.",
+                "<strong>In point of</strong> fact, <strong>the</strong> data <strong>that was</strong> collected shows <strong>an</strong> increase <strong>of 10%."
             ],
             [
                 "<strong>For all intents and</strong> purposes, <strong>the</strong> decision <strong>that was</strong> made <strong>by the</strong> committee <strong>was the</strong> right one.",
@@ -830,7 +830,7 @@
             {
                 topic: "Topic: The fall of the Berlin Wall",
                 facts: [
-                    "For 28 years (1961-1SAM_9_21), the Berlin Wall divided East and West Berlin.",
+                    "For 28 years (1961-1989), the Berlin Wall divided East and West Berlin.",
                     "It was a concrete barrier built by East Germany (GDR).",
                     "Its purpose was to stop East Germans from fleeing to the West.",
                     "The wall symbolized the 'Iron Curtain' of the Cold War.",
@@ -910,18 +910,19 @@
         
         const seniorPunctuationErrors = [
             "In the novel the hunger games katniss everdeen lives in dystopia. She volunteers for a deadly game to save her sister prim. Katniss and the other tribute peeta mellark have to fight other kids to the death. The games are run by the capitol a cruel government. Katniss says 'if we burn you burn with us' She becomes a symbol of rebellion. the book is a powerful story about survival and control.",
-            "The movie spider-man into the spider-verse is about miles morales. He gets bitten by a radioactive spider and becomes spider-man. He soon learns hes not the only one. He meets other spider-people from different dimensions including peter b parker and gwen stacy. They have to work together to stop the villain kingpin. Kingpin wants to break reality. Miles learns that 'anyone can wear the mask'",
+            "The movie spider-man into the spider-verse is about miles morales. He gets bitten by a radioactive spider and becomes spider-man. He soon learns hes not the 'only one. He meets other spider-people from different dimensions including peter b parker and gwen stacy. They have to work together to stop the villain kingpin. Kingpin wants to break reality. Miles learns that 'anyone can wear the mask'",
             "Shakespeare's play macbeth is a dark and tragic story. A general named macbeth meets three witches. They give him a prophecy that he will be king. Macbeth and his wife lady macbeth decide to kill king duncan. After he becomes king macbeth is haunted by guilt. Lady Macbeth says 'out damned spot' because she cant wash blood off her hands. The play shows how ambition can destroy people.",
             "The lord of the rings by jrr tolkien is an epic fantasy. A hobbit named frodo baggins must destroy a powerful ring. He forms a fellowship with eight companions including gandalf the wizard and aragorn the ranger. Their goal is to take the ring to mordor. The ring's creator sauron wants it back. Gandalf tells frodo 'all we have to decide is what to do with the time that is given to us'",
             "The novel '1984' by george orwell is set in a totalitarian state. The government known as big brother watches everyone. The main character winston smith works at the ministry of truth. his job is to rewrite history. He hates the party and secretly rebels. He writes 'down with big brother' in a diary. its a terrifying book about surveillance and freedom.",
             "In 'a wrinkle in time' a girl named meg murry goes on a quest. She has to save her father from a dark planet. She travels with her brother charles wallace and her friend calvin. Three strange beings mrs whatsit mrs who and mrs which help them. They travel by 'tesseracting' which is folding space. megs greatest weapon is her love for her family.",
             "The movie 'inception' is about a thief named dom cobb. He doesnt steal things he steals ideas. He does this by entering peoples dreams. Cobb gets a chance to go home. but first he must do the opposite plant an idea. His team has to go deep into many dream levels. The movie is confusing but amazing. people still debate the ending.",
             "mary shelleys 'frankenstein' is a famous gothic novel. A scientist victor frankenstein creates a living being. from old body parts. He is horrified by his creation. and abandons it. The creature is intelligent but lonely. He gets angry at victor. and seeks revenge. The creature says 'I ought to be thy adam but I am rather the fallen angel'",
-            "The film 'parasite' from korea won many awards. It tells the story of the kim family. who are very poor. They slowly trick their way into working for the rich park family. The movie is funny at first. but it becomes very dark and violent. It explores themes of class warfare and social inequality. The director is bong joon-ho.",
+            "The film 'parasite' from korea won many awards. It tells the story of the kim family. who are very poor. They slowly trick their way into working for the rich park family. The movie is funny at first. but it becomes very dark and violent. It explores themes of class warfare and social inequality. The director is bong joo-ho.",
             "In 'the martian' an astronaut mark watney is left on mars. His crew thinks hes dead after a dust storm. Watney must use science. and his skills to survive. He figures out how to grow potatoes on mars. He says 'im going to have to science the... out of this'. NASA eventually realizes hes alive. and plans a risky rescue mission."
         ];
         
         // --- Activity 10 Data (Spelling) ---
+        // Expanded to 30 words each
         const juniorSpelling = [
             { mis: "becuse", def: "For the reason that.", cor: "because" },
             { mis: "frend", def: "A person you know well and like.", cor: "friend" },
@@ -937,7 +938,22 @@
             { mis: "familly", def: "A group of parents and children.", cor: "family" },
             { mis: "suprise", def: "An unexpected event.", cor: "surprise" },
             { mis: "enuff", def: "As much or as many as required.", cor: "enough" },
-            { mis: "ansur", def: "A reply to a question.", cor: "answer" }
+            { mis: "ansur", def: "A reply to a question.", cor: "answer" },
+            { mis: "haf", def: "One of two equal parts.", cor: "half" },
+            { mis: "wuz", def: "Past tense of 'is'.", cor: "was" },
+            { mis: "sed", def: "Past tense of 'say'.", cor: "said" },
+            { mis: "ther", def: "In, at, or to that place.", cor: "there" },
+            { mis: "ar", def: "Plural present tense of 'be'.", cor: "are" },
+            { mis: "beter", def: "Of a higher standard.", cor: "better" },
+            { mis: "firts", def: "Coming before all others.", cor: "first" },
+            { mis: "lite", def: "The natural agent that makes things visible.", cor: "light" },
+            { mis: "cood", def: "Past tense of 'can'.", cor: "could" },
+            { mis: "mutch", def: "A large amount.", cor: "much" },
+            { mis: "lov", def: "A strong feeling of affection.", cor: "love" },
+            { mis: "howse", def: "A building for human habitation.", cor: "house" },
+            { mis: "sum", def: "An unspecified amount or number.", cor: "some" },
+            { mis: "ov", def: "Expressing the relationship between a part and a whole.", cor: "of" },
+            { mis: "pleese", def: "A polite word used for requests.", cor: "please" }
         ];
 
         const seniorSpelling = [
@@ -958,9 +974,21 @@
             { mis: "knowlege", def: "Facts, information, and skills acquired through experience.", cor: "knowledge" },
             { mis: "recomend", def: "To suggest that (someone or something) is good.", cor: "recommend" },
             { mis: "restaraunt", def: "A place where people pay to sit and eat meals.", cor: "restaurant" },
-            { mis: "tommorow", def: "The day after today.", cor: "tomorrow" }
+            { mis: "tommorow", def: "The day after today.", cor: "tomorrow" },
+            { mis: "beleive", def: "To accept something as true.", cor: "believe" },
+            { mis: "comittee", def: "A group of people appointed for a specific function.", cor: "committee" },
+            { mis: "embarass", def: "To cause someone to feel awkward or ashamed.", cor: "embarrass" },
+            { mis: "existance", def: "The fact or state of living or having reality.", cor: "existence" },
+            { mis: "fasinating", def: "Extremely interesting.", cor: "fascinating" },
+            { mis: "harrass", def: "To subject to aggressive pressure or intimidation.", cor: "harass" },
+            { mis: "irresistable", def: "Too attractive to be resisted.", cor: "irresistible" },
+            { mis: "millenium", def: "A period of a thousand years.", cor: "millennium" },
+            { mis: "privilage", def: "A special right or advantage.", cor: "privilege" },
+            { mis: "publically", def: "In a way that is open to public view.", cor: "publicly" },
+            { mis: "sincerly", def: "In a genuine or real way.", cor: "sincerely" },
+            { mis: "untill", def: "Up to the point in time that.", cor: "until" }
         ];
-
+        
         // --- Activity 11 Data (Story Pro) ---
         const juniorNarrativeTopics = [
             "The Chase", "The Secret Door", "The Lost Dog", "The Magic Treehouse", "The Strange Noise", "The Bully", "First Day", "The Treasure Map", "A Big Mistake", "The New Pet", "Locked Out"
@@ -971,7 +999,7 @@
         ];
         
         const storyProStarters = [
-            "Wiping it away with...", "It was remarkable that...", "Glancing furtively,", "Boldly, she...", "Disappearing once more into...", "The warm light...", "Obviously,", "We wondered when...", "After finally coming back...", "Placing his arms...", "Breathing heavily,", "With an abrupt halt,", "She just lay there and...", "Heavy footsteps echoed...", "Nothing seemed more real than...", "Enjoying the silence, she...", "With a crushed heart,", "There was something strange...", "His greatest desire was to...", "There was no sound but the...", "It was a heavy price...", "Since that moment,", "His mistake was...", "Hissing maliciously,", "After being sent away,", "Thinking it would help, she...", "Few things were more pleasing than...", "The question was obvious:", "Exactly how would it...", "They'd never seen such...", "On the second night,", "Cunningly, we/he/she...", "Laying against the...", "With raised eyebrows,", "With a brief glance,", "With a cold heart, she...", "Retreating apprehensively from...", "Standing unflinchingly, he...", "Opening her eyes, she...", "It didn't shock her that...", "Her eyes travelled...", "It reminded him of...", "It was different because...", "Ashamed, he turned and...", "With a suppressed smile,", "With a whisper, she...", "Admiring the sight, we...", "We afraid that...", "It was more likely that...", "If his intention was...", "It seemed black/white/blue as...", "Calmy, she...", "She hesitated then...", "It was particularly...", "Outside what was normal,", "With a due note of protest,", "Who could say how many...", "With little resistance,", "Watching her face, he...", "Discomfort gripped her when...", "The expectation was...", "With quivering hands,", "After a questioning gaze,", "Forcefully, he was ordered to...", "Beyond ordinary, it...", "It was appreciated when...", "Although he put...", "Of all the sadness,", "The remark deserved...", "Even though he knew...", "With scarcely a word,", "The only reason...", "For a dreadful moment,", "Walking ponderously, he/she...", "It struck her that...", "Its eerie beauty...", "Upon further inspection,", "Nothing ever seemed...", "She constantly felt...", "He looked relieved when...", "His undoing was...", "Simply she commanded,", "Glancing over his shoulder,", "Because of that one decision...", "Though they were from...", "Like everything else...", "The anxiety in her voice...", "With flawless movements she...", "Exuding authority she...", "But as exhausted as he was...", "An unconscious need to...", "By his calculations,", "A black shroud slowly...", "She spoke three words:", "Thinking of the injustice, she...", "Surrendering to the feeling of...", "Hesitating a fraction too long...", "Whole fragments of his memories...", "Pausing, and almost as an afterthought...", "With a soft chime the...", "Whether it was because she spent too long...", "Deteriorating alarmingly,", "He didn't care to be reminded of...", "Her every intonation meant...", "Triggered by...", "Sooner than anticipated...", "Not a moment passed when...", "As beautiful and intimidating as she was,", "Instead of introductions, she...", "Deliberately matching his tone, she...", "Conforming to the status quo,", "Laying aside her hurts,", "Failing to see the logic,", "Ignoring the shake of her head,", "Looking bedraggled,", "Gesturing emphatically,", "Failing to refuse meant...", "He made no comment as...", "Deemed incapable of...", "Victory appeared certain...", "Moving faster than normal,", "Schooled in the art of...", "Devoting several seconds to...", "Sweeping the dust from her mind...", "Sensing tension...", "His thoughts, however, were of...", "His mannerisms revealed...", "The accepted assumption was...", "Walking in the dying twilight...", "A troubling sign appeared when...", "Distinctly lacking any...", "Apparently no one considered...", "The possibility of...", "She busied herself figuring out...", "On the opposite side of...", "Hearing a sudden rustle of...", "Lulled into thinking...", "With her defences down...", "Finally in control of...", "Concerned about his safety...", "His movements were dictated by...", "Disturbed by the vision of...", "Surprised by her presence...", "Expressing disappointment...", "She received preferential treatment because...", "She turned her attention to...", "Wondering what attracted her to...", "A strand of hair slipped...", "At the first station,", "Walking behind a short distance...", "Inside the voices were...", "Somewhere along the darkened...", "Approaching at high speed...", "An instantly familiar face/shape...", "Forced to the ground...", "Confirming the details...", "Regarded as the...", "Late the following afternoon...", "Wearing an unflattering...", "Behaving as well as expected...", "His mood changed dramatically when...", "Mistaken for weakness...", "She had a weakness for three things:", "Unable to believe it,", "With a few hours to kill...", "Decidedly less cordial, her tone...", "With the disappearance of...", "Accompanied by...", "Accepting the inevitable...", "Assuming it would be...", "With a subtle gesture,", "An empty space...", "Besides being better acquainted,", "Blocking the view,", "Debate raged whether...", "Remaining hidden...", "Unpleasant noises disguised...", "Deciding not to...", "Persisting with that train of thought...", "With no need to look further...", "One thing became abundantly clear...", "Pondering the implications of the statement...", "Panicking at the thought...", "It left her one problem,", "Shaped by years of...", "Under pressure from...", "A major setback,", "The closest thing...", "Provoked outbursts always...", "Satisfying nobody,", "Rumours abounded that...", "Greeted with an expression of...", "Dismayed to discover...", "Possessed by a...", "Revealing much of...", "Believed to be a...", "Proved wrong,", "Offered the choice,", "Once a quiet lane way,", "Making no attempt to conceal...", "Admired for her...", "Struggling to comprehend...", "Rarely permitted to...", "Flashing a guarded smile,", "Surrendering helplessly,", "Such an action necessitated...", "While regarded as the most...", "To navigate this maze of emotions...", "What survived of the incident...", "A burst of activity...", "Emphasis lay on...", "Their first meeting ended in circumstances..."
+            "Wiping it away with...", "It was remarkable that...", "Glancing furtively,", "Boldly, she...", "Disappearing once more into...", "The warm light...", "Obviously,", "We wondered when...", "After finally coming back...", "Placing his arms...", "Breathing heavily,", "With an abrupt halt,", "She just lay there and...", "Heavy footsteps echoed...", "Nothing seemed more real than...", "Enjoying the silence, she...", "With a crushed heart,", "There was something strange...", "His greatest desire was to...", "There was no sound but the...", "It was a heavy price...", "Since that moment,", "His mistake was...", "Hissing maliciously,", "After being sent away,", "Thinking it would help, she...", "Few things were more pleasing than...", "The question was obvious:", "Exactly how would it...", "They'd never seen such...", "On the second night,", "Cunningly, we/he/she...", "Laying against the...", "With raised eyebrows,", "With a brief glance,", "With a cold heart, she...", "Retreating apprehensively from...", "Standing unflinchingly, he...", "Opening her eyes, she...", "It didn't shock her that...", "Her eyes travelled...", "It reminded him of...", "It was different because...", "Ashamed, he turned and...", "With a suppressed smile,", "With a whisper, she...", "Admiring the sight, we...", "We afraid that...", "It was more likely that...", "If his intention was...", "It seemed black/white/blue as...", "Calmy, she...", "She hesitated then...", "It was particularly...", "Outside what was normal,", "With a due note of protest,", "Who could say how many...", "With little resistance,", "Watching her face, he...", "Discomfort gripped her when...", "The expectation was...", "With quivering hands,", "After a questioning gaze,", "Forcefully, he was ordered to...", "Beyond ordinary, it...", "It was appreciated when...", "Although he put...", "Of all the sadness,", "The remark deserved...", "Even though he knew...", "With scarcely a word,", "The only reason...", "For a dreadful moment,", "Walking ponderously, he/she...", "It struck her that...", "Its eerie beauty...", "Upon further inspection,", "Nothing ever seemed...", "She constantly felt...", "He looked relieved when...", "His undoing was...", "Simply she commanded,", "Glancing over his shoulder,", "Because of that one decision...", "Though they were from...", "Like everything else...", "The anxiety in her voice...", "With flawless movements she...", "Exuding authority she...", "But as exhausted as he was...", "An unconscious need to...", "By his calculations,", "A black shroud slowly...", "She spoke three words:", "Thinking of the injustice, she...", "Surrendering to the feeling of...", "Hesitating a fraction too long...", "Whole fragments of his memories...", "Pausing, and almost as an afterthought...", "With a soft chime the...", "Whether it was because she spent too long...", "Deteriorating alarmingly,", "He didnt care to be reminded of...", "Her every intonation meant...", "Triggered by...", "Sooner than anticipated...", "Not a moment passed when...", "As beautiful and intimidating as she was,", "Instead of introductions, she...", "Deliberately matching his tone, she...", "Conforming to the status quo,", "Laying aside her hurts,", "Failing to see the logic,", "Ignoring the shake of her head,", "Looking bedraggled,", "Gesturing emphatically,", "Failing to refuse meant...", "He made no comment as...", "Deemed incapable of...", "Victory appeared certain...", "Moving faster than normal,", "Schooled in the art of...", "Devoting several seconds to...", "Sweeping the dust from her mind...", "Sensing tension...", "His thoughts, however, were of...", "His mannerisms revealed...", "The accepted assumption was...", "Walking in the dying twilight...", "A troubling sign appeared when...", "Distinctly lacking any...", "Apparently no one considered...", "The possibility of...", "She busied herself figuring out...", "On the opposite side of...", "Hearing a sudden rustle of...", "Lulled into thinking...", "With her defences down...", "Finally in control of...", "Concerned about his safety...", "His movements were dictated by...", "Disturbed by the vision of...", "Surprised by her presence...", "Expressing disappointment...", "She received preferential treatment because...", "She turned her attention to...", "Wondering what attracted her to...", "A strand of hair slipped...", "At the first station,", "Walking behind a short distance...", "Inside the voices were...", "Somewhere along the darkened...", "Approaching at high speed...", "An instantly familiar face/shape...", "Forced to the ground...", "Confirming the details...", "Regarded as the...", "Late the following afternoon...", "Wearing an unflattering...", "Behaving as well as expected...", "His mood changed dramatically when...", "Mistaken for weakness...", "She had a weakness for three things:", "Unable to believe it,", "With a few hours to kill...", "Decidedly less cordial, her tone...", "With the disappearance of...", "Accompanied by...", "Accepting the inevitable...", "Assuming it would be...", "With a subtle gesture,", "An empty space...", "Besides being better acquainted,", "Blocking the view,", "Debate raged whether...", "Remaining hidden...", "Unpleasant noises disguised...", "Deciding not to...", "Persisting with that train of thought...", "With no need to look further...", "One thing became abundantly clear...", "Pondering the implications of the statement...", "Panicking at the thought...", "It left her one problem,", "Shaped by years of...", "Under pressure from...", "A major setback,", "The closest thing...", "Provoked outbursts always...", "Satisfying nobody,", "Rumours abounded that...", "Greeted with an expression of...", "Dismayed to discover...", "Possessed by a...", "Revealing much of...", "Believed to be a...", "Proved wrong,", "Offered the choice,", "Once a quiet lane way,", "Making no attempt to conceal...", "Admired for her...", "Struggling to comprehend...", "Rarely permitted to...", "Flashing a guarded smile,", "Surrendering helplessly,", "Such an action necessitated...", "While regarded as the most...", "To navigate this maze of emotions...", "What survived of the incident...", "A burst of activity...", "Emphasis lay on...", "Their first meeting ended in circumstances..."
         ];
 
 
@@ -1306,15 +1334,14 @@
             const currentWeekString = `${currentYear}-${currentWeek}`;
             let contentCycleIndex = parseInt(localStorage.getItem('writingToolCycleIndex') || '0', 10);
             
-            // We'll use 10 as the cycle length, as most banks have at least 10 items.
-            const cycleLength = 10; 
+            // We'll use 30 as the cycle length, as the spelling banks now have 30 items.
+            const cycleLength = 30; 
 
             if (lastVisitedWeek !== currentWeekString) {
                 // It's a new week! Increment the cycle index.
                 contentCycleIndex = (contentCycleIndex + 1) % cycleLength; 
                 localStorage.setItem('writingToolCycleIndex', contentCycleIndex);
                 localStorage.setItem('writingToolLastWeek', currentWeekString);
-S
             }
             
             // Load the content for the current cycle
