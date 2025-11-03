@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Writing Lesson Tool</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Active tab style */
+        .tab-button.active {
+            border-color: #4f46e5; /* indigo-600 */
+            color: #4f46e5;
+            background-color: #eef2ff; /* indigo-50 */
+        }
+        /* Inactive tab style */
+        .tab-button {
+            border-color: transparent;
+            color: #6b7280; /* gray-500 */
+        }
+        .tab-button:hover {
+            border-color: #d1d5db; /* gray-300 */
+            color: #374151; /* gray-700 */
+        }
+        /* Hide inactive tab panels */
+        .tab-panel {
+            display: none;
+        }
+        .tab-panel.active {
+            display: block;
+        }
+    </style>
+    <!-- Load Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+        <!-- Header -->
+        <div class="p-6 md:p-8 border-b bg-white">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Online Writing Lesson Tool</h1>
+            <p class="text-lg text-gray-600">Dynamic activities for Junior (Grades 3-6) and Senior (Grades 7-10) students.</p>
+            <button id="generate-button" class="mt-4 px-5 py-3 rounded-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow">
+                Generate New Random Activities
+            </button>
+            <p class="text-sm text-gray-500 mt-2">The page loads a new "Lesson of the Week" automatically. Use this button to override it with a random set.</p>
+        </div>
+
+        <!-- Tab Buttons -->
+        <div class="flex flex-wrap -mb-px space-x-2 px-6 md:px-8 border-b bg-gray-50" id="tab-buttons">
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="1">Activity 1: Tense</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="2">Activity 2: Verbs</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="3">Activity 3: Starts</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="4">Activity 4: Stop Words</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="5">Activity 5: Puzzle</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="6">Activity 6: Persuasive</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="7">Activity 7: Facts to Paragraph</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="8">Activity 8: Vocab</button>
+            <button class="tab-button inline-block px-4 py-2.5 rounded-t-lg border-b-2 font-medium" data-tab="9">Activity 9: Punctuation</button>
+        </div>
+
+        <!-- Tab Content Panels -->
+        <div id="tab-panels" class="border-t -mt-px">
+
+            <!-- Activity 1: Tense -->
+            <div id="tab-panel-1" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">Read the paragraph below, which is written in the present tense. Rewrite the paragraph, changing it to the past tense.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <p id="act1-junior" class="text-gray-800 leading-relaxed"></p>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <p id="act1-senior" class="text-gray-800 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 2: Verbs -->
+            <div id="tab-panel-2" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">Improve the following sentences by replacing the weak verb (<strong>bolded</strong>) with a more powerful, descriptive, and precise verb.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <ol id="act2-junior" class="list-decimal list-inside space-y-3 text-gray-800"></ol>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <ol id="act2-senior" class="list-decimal list-inside space-y-3 text-gray-800"></ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 3: Starts -->
+            <div id="tab-panel-3" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">These sentences start with weak "filler" words. Rewrite each sentence to give it a stronger, more engaging start. (e.g., Change "There was a big storm..." to "A big storm suddenly hit...")</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <ol id="act3-junior" class="list-decimal list-inside space-y-3 text-gray-800"></ol>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <ol id="act3-senior" class="list-decimal list-inside space-y-3 text-gray-800"></ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 4: Stop Words -->
+            <div id="tab-panel-4" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">"Stop words" (like <strong>a, an, the, of, on, is, it</strong>) can clutter our writing. Rewrite these sentences to be shorter and more powerful by removing as many <strong>bolded</strong> stop words as possible.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <ol id="act4-junior" class="list-decimal list-inside space-y-3 text-gray-800"></ol>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <ol id="act4-senior" class="list-decimal list-inside space-y-3 text-gray-800"></ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 5: Puzzle -->
+            <div id="tab-panel-5" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">How many smaller words can you find in the puzzle word? You can only use the letters available in the main word.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <p id="act5-junior" class="text-5xl font-bold text-center text-blue-900 tracking-widest"></p>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <p id="act5-senior" class="text-5xl font-bold text-center text-indigo-900 tracking-widest"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 6: Persuasive -->
+            <div id="tab-panel-6" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">Your goal is to write a persuasive paragraph on the topic below. Use the sentence starters to help you build a strong argument.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-4" id="act6-junior-topic"></h3>
+                        <p class="font-medium text-gray-700 mb-2">Here are 8 sentence starters to help you:</p>
+                        <ul id="act6-junior-starters" class="list-disc list-inside space-y-2 text-gray-800"></ul>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <h3 class="text-2xl font-bold text-center text-gray-800 mb-4" id="act6-senior-topic"></h3>
+                        <p class="font-medium text-gray-700 mb-2">Here are 8 sentence starters to help you:</p>
+                        <ul id="act6-senior-starters" class="list-disc list-inside space-y-2 text-gray-800"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 7: Facts to Paragraph -->
+            <div id="tab-panel-7" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">Read the facts below. Your task is to combine these dot points into a single, well-written paragraph. Do not just list them—connect the ideas smoothly.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2" id="act7-junior-topic"></h3>
+                        <ul id="act7-junior-facts" class="list-disc list-inside space-y-2 text-gray-800"></ul>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2" id="act7-senior-topic"></h3>
+                        <ul id="act7-senior-facts" class="list-disc list-inside space-y-2 text-gray-800"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 8: Vocab -->
+            <div id="tab-panel-8" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">Learn these new words. Try to use one of them in a sentence today.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <div id="act8-junior" class="space-y-5"></div>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <div id="act8-senior" class="space-y-5"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity 9: Punctuation -->
+            <div id="tab-panel-9" class="tab-panel p-6 md:p-8">
+                <p class="text-base text-gray-700 mb-6">This paragraph is full of punctuation errors. Find all the mistakes and rewrite it correctly. Look for missing commas, incorrect apostrophes, and missing full stops or capital letters.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Junior Column -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-blue-800 mb-3">Junior Students (Grades 3-6)</h2>
+                        <p id="act9-junior" class="text-gray-800 leading-relaxed"></p>
+                    </div>
+                    <!-- Senior Column -->
+                    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-5">
+                        <h2 class="text-xl font-semibold text-indigo-800 mb-3">Senior Students (Grades 7-10)</h2>
+                        <p id="act9-senior" class="text-gray-800 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- DATA BANKS ---
+
+        // Helper function to get a random item from an array
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        // Helper function to get N unique random items from an array
+        function getNRandomItems(arr, num) {
+            const shuffled = [...arr].sort(() => 0.5 - Math.random());
+            return shuffled.slice(0, num);
+        }
+
+        // Helper function to shuffle an array (Fisher-Yates shuffle)
+        function shuffleArray(arr) {
+            let newArr = [...arr]; // Create a copy of the array
+            for (let i = newArr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArr[i], newArr[j]] = [newArr[j], newArr[i]]; // Swap elements
+            }
+            return newArr;
+        }
+
+        // Helper function to get week number
+        function getWeekNumber(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+            var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+            return [d.getUTCFullYear(), weekNo];
+        }
+
+        // --- Activity 1 Data (Tense) ---
+        const juniorTenseParagraphs = [
+            "My dog, Barnaby, is a very silly animal. He loves to chase his tail. He also thinks he is a parrot and sits on my shoulder. When I eat breakfast, he looks at me with big, sad eyes. I always give him a small piece of my toast. He is my best friend.",
+            "Our garden is full of surprises. My mum grows bright red tomatoes. My dad plants tall sunflowers that look at the sun. I have a small patch where I grow carrots. A family of bluebirds lives in a nest by the fence. I love to watch them fly.",
+            "Going to the beach is my favourite thing to do. I build giant sandcastles with big walls. My sister likes to look for shells in the wet sand. We jump over the waves together. Sometimes, a wave is too big and it knocks us over. We just laugh and get back up.",
+            "My classroom is a busy place. Our teacher, Ms. April, reads us stories on the colorful mat. We use blocks to build tall towers. I like to paint pictures with bright colors. My best friend, Sam, always makes funny pictures of aliens. We learn new things every day.",
+            "My lizard, Sparky, is a funny pet. He has green scales and bright orange eyes. He spends most of his day sitting on a rock under his heat lamp. When I feed him crickets, he moves very fast. His tongue zips out and grabs the bug. He is a very cool and quiet friend.",
+            "Our school bus is bright yellow. It rumbles down my street every morning at 8:00 AM. My friends and I sit in the back. We talk about video games and what we will play at recess. Our bus driver, Mr. Ken, always says 'Good morning!' with a big smile.",
+            "On Saturdays I wake up early. My dad makes pancakes for breakfast. He flips them high in the air and I try to catch one on my plate. Later we go to the park. I ride my scooter fast down the path. It is always a perfect day.",
+            "My cat, Mittens, is very lazy. She sleeps all day on the softest chair in the house. When she wakes up, she stretches her paws and gives a big yawn. She only moves for two things food and cuddles. I think she has the best life.",
+            "My brother is building a rocket from a cardboard box. He uses foil for the windows and paper for the flames. He says he is an astronaut. He puts his teddy bear inside. The bear is the pilot. I think the rocket is amazing and I want to help him build a launch pad.",
+            "Our town library is a quiet place. I go there every Friday. The librarian, Mrs. Gable, knows my name. She always saves new mystery books for me. I sit in the big, comfy beanbag chair. I read about detectives and secret clues. It is the best way to start the weekend.",
+            "Today is the school sports day. I am in the green team. We run races and do the long jump. My favorite event is the egg and spoon race. I try to be very careful and walk slowly. My friends cheer for me from the side. Even if I don't win, I have a lot of fun."
+        ];
+
+        const seniorTenseParagraphs = [
+            "My friend, Alex, is an amazing musician. He plays the guitar in a band called 'The Missing Socks'. They practice in his garage every weekend. When they play, the music is so loud that the windows shake. Alex writes his own songs about space travel and robot feelings. He hopes to be famous one day, but mostly he just loves to play.",
+            "My older sister works at a small, local bakery. She wakes up before the sun rises. Her job is to bake all the bread and muffins for the day. She says the best part is the smell of fresh bread mixing with sweet cinnamon. By the time I wake up, she is already finishing her shift. Sometimes, she brings home a warm croissant just for me.",
+            "Our school's robotics team is building a new machine for the state competition. The robot, which we name 'Clunko', has six wheels and two grabbing arms. Our captain, Maria, does all the programming. My job is to design and build the chassis. We meet every Tuesday and Thursday, working late into the evening. We all believe this is our year to win.",
+            "My grandfather is a master carpenter. His workshop smells like sawdust and wood varnish. He crafts beautiful furniture using only hand tools. He says the secret is patience and respecting the wood grain. I sit for hours and watch him carve intricate details into a chair leg. He is teaching me how to make a small, wooden boat.",
+            "The community is working to restore the old, abandoned city library. The building is beautiful, with high ceilings and large, arched windows. Volunteers spend their weekends painting walls and repairing bookshelves. We all believe a town needs a quiet place for reading and learning. Our goal is to reopen its doors by next spring.",
+            "Our high school's debate team travels to three different states for competitions. We practice complex arguments about current events. Our coach insists that we research both sides of every topic. Last month, my partner and I won a trophy for our argument on renewable energy. The long bus rides are boring, but the debates are always exciting.",
+            "My history teacher, Ms. Val, is brilliant. She never just reads from the textbook. Instead, she tells us stories about historical events as if she was there. She uses different voices and walks around the room. We all listen, completely captivated. She says history is not about dates, but about the people who lived them.",
+            "The local animal shelter is always looking for volunteers. I spend my Saturday mornings there. My main job is to walk the dogs and clean the kennels. It is not glamorous work, but it feels important. The best part is seeing a dog finally get adopted. Their happy faces make all the cleaning worthwhile.",
+            "A new skate park opens downtown. It features a large concrete bowl and several challenging ramps. Skaters from all over the city come to try it out. They perform impressive tricks, grinding on rails and catching air. A local artist paints a vibrant mural on the main wall. The park is already a popular spot for teens to hang out.",
+            "My aunt is a marine biologist. She studies the coral reefs in Australia. She dives deep into the ocean to tag sea turtles and record fish populations. She says the reef is in serious danger from pollution and climate change. She works hard to find solutions. Her dedication to protecting the ocean is truly inspiring.",
+            "The school newspaper is a chaotic but exciting place. We meet every Wednesday to plan the next issue. Our editor assigns stories about school sports, the upcoming play, and student opinions. I write the technology column. I review new apps and video games. It is a lot of work to meet the deadline, but I love seeing my name in print."
+        ];
+
+        // --- Activity 2 Data (Verbs) ---
+        const juniorVerbSentences = [
+            ["In the backyard, my brother <strong>made</strong> a tall tower of blocks.", "My brother <strong>stacked</strong> a tall tower of blocks."],
+            ["A fast rabbit <strong>went</strong> across the grass.", "A fast rabbit <strong>darted</strong> across the grass."],
+            ["I <strong>saw</strong> a huge spider in the corner of my room.", "I <strong>spotted</strong> a huge spider in the corner of my room."],
+            ["'Be quiet!' my dad <strong>said</strong> to the noisy dog.", "'Be quiet!' my dad <strong>whispered</strong> to the noisy dog."],
+            ["My cat <strong>looked</strong> at the bird outside the window.", "My cat <strong>stared</strong> at the bird outside the window."],
+            ["With a big smile, Sarah <strong>got</strong> her birthday present.", "With a big smile, Sarah <strong>received</strong> her birthday present."],
+            ["My dog <strong>likes</strong> to chase the red ball.", "My dog <strong>loves</strong> to chase the red ball."],
+            ["After the long race, I <strong>was</strong> very tired.", "After the long race, I <strong>felt</strong> very tired."],
+            ["The boat <strong>moved</strong> slowly on the water.", "The boat <strong>drifted</strong> slowly on the water."],
+            ["My mom <strong>put</strong> the groceries on the table.", "My mom <strong>placed</strong> the groceries on the table."],
+            ["The boy <strong>walked</strong> down the hallway.", "The boy <strong>shuffled</strong> down the hallway."],
+            ["I <strong>had</strong> a good idea.", "I <strong>discovered</strong> a good idea."],
+            ["My friend <b>took</b> the pencil from my desk.", "My friend <b>snatched</b> the pencil from my desk."],
+            ["The baby <b>cried</b> when her mom left the room.", "The baby <b>wailed</b> when her mom left the room."],
+            ["I <b>ate</b> my breakfast very quickly.", "I <b>wolfed down</b> my breakfast very quickly."]
+        ];
+
+        const seniorVerbSentences = [
+            ["At the end of the long speech, the crowd <strong>moved</strong> their hands together.", "The crowd <strong>applauded</strong>."],
+            ["From the top of the hill, the hiker <strong>looked</strong> at the beautiful view.", "The hiker <strong>admired</strong> the beautiful view."],
+            ["The scientist <strong>got</strong> the two chemicals and put them in a tube.", "The scientist <strong>combined</strong> the two chemicals."],
+            ["After winning the game, the team captain <strong>said</strong> a few words of thanks.", "The team captain <strong>offered</strong> a few words of thanks."],
+            ["Hungry after the long hike, Kevin <strong>ate</strong> the entire sandwich in seconds.", "Kevin <strong>devoured</strong> the entire sandwich."],
+            ["The lawyer <strong>asked</strong> the witness to describe the event.", "The lawyer <strong>pressed</strong> the witness to describe the event."],
+            ["A small crack in the dam <strong>made</strong> a huge flood.", "A small crack in the dam <strong>caused</strong> a huge flood."],
+            ["The detective incredibly <strong>found</strong> the missing clue under the rug.", "The detective <strong>uncovered</strong> the missing clue."],
+            ["The teacher <strong>told</strong> the class to be quiet.", "The teacher <strong>instructed</strong> the class to be quiet."],
+            ["My brother <strong>broke</strong> the window with a baseball.", "My brother <strong>shattered</strong> the window with a baseball."],
+            ["The company <strong>built</strong> a new skyscraper downtown.", "The company <strong>constructed</strong> a new skyscraper downtown."],
+            ["After the argument, my friend <strong>went</strong> out of the room.", "After the argument, my friend <strong>stormed</strong> out of the room."],
+            ["The senator <strong>talked</strong> about the new law.", "The senator <strong>argued</strong> for the new law."],
+            ["The race car <strong>went</strong> around the track at top speed.", "The race car <strong>blazed</strong> around the track at top speed."],
+            ["The judge <b>gave</b> the winner a gold medal.", "The judge <b>presented</b> the winner with a gold medal."]
+        ];
+
+
+        // --- Activity 3 Data (Starts) ---
+        const juniorBadStarts = [
+            "There is a big, red fire truck down the street.",
+            "It is a very sunny day today.",
+            "A bird is building a nest in our tree.",
+            "This is my new puppy, Leo.",
+            "They are playing soccer in the park.",
+            "It was a really cold day.",
+            "There were lots of kids at the party.",
+            "This is the best game ever.",
+            "He was a very brave knight.",
+            "She is the fastest runner on the team.",
+            "It was raining hard all night.",
+            "There is a monster under my bed.",
+            "A new toy store just opened in town.",
+            "These are my favorite shoes."
+        ];
+
+        const seniorBadStarts = [
+            "There are many reasons why recycling is important.",
+            "It is a fact that exercise is good for your health.",
+            "This is a book about a boy who discovers a magic sword.",
+            "He is a character who is very brave and also very kind.",
+            "Then, the hero decided to go on a quest.",
+            "There is a large problem with pollution in our city.",
+            "It is important to remember our history.",
+            "They all agreed that the plan was a good one.",
+            "This shows that the experiment was a success.",
+            "An example of this is when the character faces the dragon.",
+            "It was a decision that would change his life.",
+            "There are many different types of solutions to this problem.",
+            "She was a scientist who made a major discovery.",
+            "These are the facts as we know them."
+        ];
+
+        // --- Activity 4 Data (Stop Words) ---
+        const juniorStopWords = [
+            [
+                "<strong>I went to the</strong> store <strong>for the</strong> purpose <strong>of buying some</strong> milk.",
+                "<strong>There are</strong> four <strong>of the</strong> birds <strong>that are sitting on top of the</strong> fence.",
+                "<strong>She has a</strong> cat <strong>that is of the</strong> color black."
+            ],
+            [
+                "<strong>He was</strong> happy <strong>because of the</strong> fact <strong>that he</strong> won <strong>the</strong> game.",
+                "<strong>I am not a</strong> fan <strong>of</strong> spinach, <strong>and I am</strong> also <strong>not a</strong> fan <strong>of</strong> broccoli.",
+                "<strong>The</strong> car <strong>is</strong> blue <strong>in</strong> color."
+            ],
+            [
+                "<strong>She has to go to the</strong> store <strong>in order to get some</strong> eggs.",
+                "<strong>I think that the</strong> movie <strong>was one of the</strong> best <strong>I have</strong> ever seen.",
+                "<strong>There is a</strong> chance <strong>that it</strong> might rain <strong>on</strong> Saturday."
+            ],
+            [
+                "<strong>The</strong> new student <strong>is one of those</strong> people <strong>who is</strong> nice <strong>to</strong> everyone.",
+                "<strong>What I am trying to</strong> say <strong>is that</strong> we should <strong>all</strong> work together.",
+                "<strong>The</strong> dog <strong>was walking on</strong> its own <strong>down the</strong> street."
+            ],
+            [
+                "<strong>The</strong> answer <strong>to the</strong> question <strong>is found in the</strong> back <strong>of the</strong> book.",
+                "<strong>I have a</strong> brother <strong>who is</strong> older <strong>than me by</strong> two years.",
+                "<strong>This is the</strong> kind <strong>of</strong> pizza <strong>that I</strong> like <strong>the</strong> most."
+            ],
+            [
+                "<strong>She is a</strong> person <strong>who is</strong> always <strong>on</strong> time <strong>for</strong> class.",
+                "<strong>We are going to go to the</strong> park <strong>on</strong> Saturday.",
+                "<strong>I do not</strong> know <strong>the</strong> answer <strong>to the</strong> question."
+            ],
+            [
+                "<strong>The</strong> team <strong>was not able to</strong> win <strong>the</strong> game.",
+                "<strong>He is</strong> tall <strong>in</strong> height.",
+                "<strong>There is no</strong> doubt <strong>that she is the</strong> best <strong>one for the</strong> job."
+            ],
+            [
+                "<strong>In the</strong> event <strong>that</strong> you <strong>are</strong> late, you need <strong>to</strong> tell <strong>the</strong> teacher.",
+                "<strong>I have a</strong> feeling <strong>that it is going to</strong> rain.",
+                "<strong>She went to the</strong> library <strong>for the</strong> purpose <strong>of</strong> studying."
+            ],
+            [
+                "<strong>The</strong> dog <strong>that is</strong> brown <strong>is the one that is</strong> mine.",
+                "<strong>I am</strong> very tired <strong>at this</strong> moment <strong>in</strong> time.",
+                "<strong>The</strong> girl <strong>with the</strong> red hat <strong>is the</strong> sister <strong>of my</strong> friend."
+            ],
+            [
+                "<strong>There is a</strong> total <strong>of</strong> ten cookies <strong>in the</strong> jar.",
+                "<strong>He is</strong> always <strong>in a</strong> hurry.",
+                "<strong>I went to the</strong> store <strong>and I</strong> bought <strong>some</strong> apples <strong>and some</strong> bananas."
+            ]
+        ];
+
+        const seniorStopWords = [
+            [
+                "<strong>The</strong> conclusion <strong>that I have come to is that</strong> we need <strong>to</strong> do more research.",
+                "<strong>The</strong> point <strong>of</strong> this essay <strong>is to make an</strong> argument <strong>about the</strong> problem <strong>of</strong> pollution.",
+                "<strong>In point of</strong> fact, <strong>the</strong> data <strong>that was</strong> collected shows <strong>an</strong> increase <strong>of</strong> 10%."
+            ],
+            [
+                "<strong>For all intents and</strong> purposes, <strong>the</strong> decision <strong>that was</strong> made <strong>by the</strong> committee <strong>was the</strong> right one.",
+                "<strong>It is</strong> clear <strong>that the</strong> author <strong>of the</strong> book <strong>is trying to</strong> say <strong>that</strong> freedom <strong>is</strong> important.",
+                "<strong>Regardless of the</strong> fact <strong>that he was</strong> tired, <strong>he</strong> continued <strong>to</strong> work <strong>on the</strong> project."
+            ],
+            [
+                "<strong>In the</strong> event <strong>that</strong> you <strong>are</strong> late, you <strong>will</strong> need <strong>to get a</strong> pass <strong>from the</strong> office.",
+                "<strong>The</strong> politician spoke <strong>in a</strong> manner <strong>that was</strong> hard <strong>to</strong> understand.",
+                "<strong>The</strong> reason <strong>why he</strong> left <strong>was due to the</strong> fact <strong>that he</strong> had another appointment."
+            ],
+            [
+                "<strong>It is a</strong> truth <strong>that is</strong> universally acknowledged <strong>that</strong> people <strong>are in</strong> want <strong>of</strong> a good story.",
+                "<strong>There are</strong> many people in <strong>the</strong> world <strong>who believe that</strong> change <strong>is</strong> needed.",
+                "<strong>In spite of the</strong> bad weather, <strong>they made the</strong> decision <strong>to go</strong> ahead <strong>with the</strong> climb."
+            ],
+            [
+                "<strong>At this</strong> point <strong>in</strong> time, <strong>we do not have</strong> enough information <strong>to make a</strong> decision.",
+                "<strong>The</strong> general consensus <strong>of</strong> opinion <strong>is that the</strong> plan <strong>is a</strong> good one.",
+                "<strong>He was</strong> visible <strong>to the</strong> eye <strong>from a</strong> long distance away."
+            ],
+            [
+                "<strong>In</strong> my personal opinion, <strong>I believe that the</strong> movie <strong>was</strong> very good.",
+                "<strong>The</strong> end result <strong>of the</strong> experiment <strong>was that it</strong> failed.",
+                "<strong>She is a</strong> person <strong>who is of the</strong> opinion <strong>that</strong> all people <strong>are</strong> equal."
+            ],
+            [
+                "<strong>It has</strong> come <strong>to my</strong> attention <strong>that</strong> many <strong>of the</strong> students <strong>are not</strong> happy.",
+                "<strong>The</strong> question <strong>as to</strong> whether <strong>we</strong> should proceed <strong>is</strong> still undecided.",
+                "<strong>I am of the</strong> understanding <strong>that the</strong> meeting <strong>is</strong> cancelled."
+            ],
+            [
+                "<strong>We are in</strong> receipt <strong>of your</strong> letter <strong>of the</strong> 15th.",
+                "<strong>The</strong> two <strong>of them are</strong> both identical.",
+                "<strong>In the</strong> case <strong>of</strong> <strong>an</strong> emergency, <strong>you</strong> should call <strong>this</strong> number."
+            ],
+            [
+                "<strong>I am</strong> writing <strong>this</strong> letter <strong>with the</strong> purpose <strong>of</strong> applying <strong>for the</strong> job.",
+                "<strong>The</strong> final outcome <strong>was not what we had</strong> expected.",
+                "<strong>She is</strong> currently <strong>in the</strong> process <strong>of</strong> writing <strong>a</strong> new book."
+            ],
+            [
+                "<strong>The</strong> fundamental nature <strong>of the</strong> problem <strong>is</strong> complex.",
+                "<strong>It is</strong> absolutely essential <strong>that you</strong> finish <strong>this on</strong> time.",
+                "<strong>There is no</strong> doubt <strong>whatsoever that he is the</strong> guilty party."
+            ]
+        ];
+
+
+        // --- Activity 5 Data (Puzzles) ---
+        const juniorPuzzles = ["TEACHER", "FRIENDS", "SCHOOL", "PLAYGROUND", "HOLIDAY", "BANANA", "ORANGE", "COMPUTER", "WATERMELON", "ELEPHANT", "STRAWBERRY", "BUTTERFLY"];
+        const seniorPuzzles = ["RESTAURANT", "WONDERFUL", "CREATIVE", "EDUCATION", "ADVENTURE", "TECHNOLOGY", "ENVIRONMENT", "GOVERNMENT", "INFORMATION", "CHOCOLATE", "EXTRAORDINARY", "CONSTITUTION"];
+        
+        // --- Activity 6 Data (Persuasive) ---
+        const juniorPersuasiveTopics = [
+            "Should kids have homework every night?",
+            "Is it better to play outside or inside?",
+            "Should all students have to wear a school uniform?",
+            "Are dogs better pets than cats?",
+            "Should kids be allowed to have a phone?",
+            "Is summer the best season?",
+            "Should we have a three-day weekend?",
+            "Is pizza the best food in the world?",
+            "Should students get paid for good grades?",
+            "Is it more fun to read a book or watch a movie?",
+            "Should recess be longer?"
+        ];
+
+        const seniorPersuasiveTopics = [
+            "Should social media use be limited for students?",
+            "Is climate change the most important issue of our time?",
+            "Should all students be required to learn a foreign language?",
+            "Is it better to live in the city or the countryside?",
+            "Should P.E. be mandatory for all four years of high school?",
+            "Is a college education necessary for success?",
+            "Should the voting age be lowered to 16?",
+            "Should all zoos be banned?",
+            "Is artificial intelligence a threat to humanity?",
+            "Should all high school students be required to volunteer?",
+            "Is space exploration a waste of money?",
+            "Should video games be considered a sport?"
+        ];
+
+        // Split into categories for balanced selection
+        const openingStarters = [
+            "Have you ever noticed how...",
+            "Let's start with a simple truth:",
+            "Picture this scenario for a moment:",
+            "It's a widely held view that...",
+            "First things first,",
+            "You may find it interesting to know that...",
+            "It's hardly a secret that...",
+            "At first glance,",
+            "Many of us assume that...",
+            "Let's kick things off by considering...",
+            "Have you ever stopped to consider...",
+            "What's truly fascinating is...",
+            "It's no secret that...",
+            "History shows us that...",
+            "Recent studies have highlighted...",
+            "Experts agree that...",
+            "An interesting fact to note is...",
+            "The evidence is clear when we see...",
+            "It's universally acknowledged that...",
+            "First off, let's look at..."
+        ];
+
+        const explorationStarters = [
+            "Digging deeper, we find that...",
+            "For instance, take the case of...",
+            "This concept comes to life when you consider...",
+            "An illustrative example of this is...",
+            "Evidence for this can be found in...",
+            "History shows us that...",
+            "A striking example is seen in...",
+            "Research suggests that...",
+            "Case in point:",
+            "This is best demonstrated by...",
+            "To illustrate this point...",
+            "For instance, consider the case of...",
+            "A perfect example of this is...",
+            "Research conducted by [Author] reveals that...",
+            "Statistics show that...",
+            "Anecdotal evidence suggests...",
+            "Case studies, such as [Case Study], demonstrate...",
+            "According to [Source], it's evident that...",
+            "Historical records bear witness to...",
+            "Scientific findings support the idea that..."
+        ];
+
+        const insightStarters = [
+            "On a more personal note,",
+            "This brings to mind a personal anecdote...",
+            "In reflecting on my own experiences,",
+            "I've personally witnessed...",
+            "This makes me think back to...",
+            "From what I've seen,",
+            "This resonates with me because...",
+            "I can't help but draw parallels to...",
+            "It's reminiscent of a time when I...",
+            "On reflection,",
+            "This strikes a chord with me because...",
+            "This brings to mind my own experience with...",
+            "Reflecting on this, I realize...",
+            "This challenges my previous understanding of...",
+            "This aligns with my belief that...",
+            "From my perspective, this is significant because...",
+            "It makes me think back to..." // Note: Some duplicates from image
+        ];
+
+        const conversationalStarters = [
+            "But here's where it gets interesting:",
+            "You're probably wondering...",
+            "So, what's the real story here?",
+            "But let's take a step back for a moment,",
+            "Funny enough,",
+            "Now, bear with me for a second,",
+            "Here's a thought,",
+            "But guess what?",
+            "You see where I'm going with this?",
+            "And, believe it or not,",
+            "You see, what's really interesting here is...",
+            "Now, let's not overlook the fact that...",
+            "Believe it or not...",
+            "Wouldn't you agree that...",
+            "The real kicker is...",
+            "Imagine for a second...",
+            "This begs the question...",
+            "But here's the kicker..." // Note: Some duplicates from image
+        ];
+
+        // --- Activity 7 Data (Facts to Paragraph) ---
+        const juniorFactSets = [
+            {
+                topic: "Topic: Emperor Penguins",
+                facts: [
+                    "Emperor penguins are the tallest of all penguin species.",
+                    "They live in the freezing cold of Antarctica.",
+                    "They can dive deeper than any other bird—down to 500 meters!",
+                    "Male penguins stand in a huddle to stay warm.",
+                    "The males also protect the eggs by balancing them on their feet.",
+                    "Mothers travel a long way to hunt for fish."
+                ]
+            },
+            {
+                topic: "Topic: The Roman Colosseum",
+                facts: [
+                    "The Colosseum is a giant stadium in Rome, Italy.",
+                    "It was built almost 2,000 years ago.",
+                    "It could hold 50,000 people.",
+                    "Gladiators fought animals and each other inside.",
+                    "Sometimes, they even flooded the arena to have mock sea battles.",
+                    "It is one of the most famous ruins in the world."
+                ]
+            },
+            {
+                topic: "Topic: Honeybees",
+                facts: [
+                    "Honeybees live in large groups called colonies.",
+                    "The leader of the colony is the queen bee.",
+                    "Bees communicate by doing a 'waggle dance'.",
+                    "A single bee makes only 1/12th of a teaspoon of honey in its lifetime.",
+                    "They visit flowers to collect nectar.",
+                    "Bees are important because they pollinate plants."
+                ]
+            },
+            {
+                topic: "Topic: The Amazon Rainforest",
+                facts: [
+                    "The Amazon is the largest tropical rainforest in the world.",
+                    "It is located in South America.",
+                    "It is home to millions of species of plants, animals, and insects.",
+                    "Many of the fruits we eat, like bananas, grow there.",
+                    "The Amazon River is the second longest river in the world.",
+                    "Scientists call it the 'lungs of the Earth' because it produces 20% of the world's oxygen."
+                ]
+            },
+            {
+                topic: "Topic: Volcanoes",
+                facts: [
+                    "A volcano is a mountain that opens to a pool of molten rock below.",
+                    "When it erupts, lava, ash, and gas escape.",
+                    "Molten rock inside the Earth is called 'magma'.",
+                    "Once it erupts from the volcano, it is called 'lava'.",
+                    "There are over 1,500 active volcanoes on Earth.",
+                    "The ash from an eruption can be good for farming soil."
+                ]
+            },
+            {
+                topic: "Topic: Blue Whales",
+                facts: [
+                    "The blue whale is the largest animal on Earth.",
+                    "It can weigh up to 200 tons, which is as much as 33 elephants.",
+                    "Its heart alone is the size of a small car.",
+                    "A blue whale's tongue can weigh as much as an elephant.",
+                    "They are the loudest animals, louder than a jet engine.",
+                    "They eat tiny shrimp-like animals called krill."
+                ]
+            },
+            {
+                topic: "Topic: The Pyramids of Giza",
+                facts: [
+                    "The Great Pyramid of Giza is in Egypt.",
+                    "It was built as a tomb for the Pharaoh Khufu.",
+                    "It took about 20 years to build.",
+                    "Historians estimate it was built using over 2 million stone blocks.",
+                    "It was the tallest man-made structure in the world for over 3,800 years.",
+                    "The pyramid is guarded by the Great Sphinx, a statue with a lion's body and a human head."
+                ]
+            },
+            {
+                topic: "Topic: Sloths",
+                facts: [
+                    "Sloths are mammals that live in Central and South America.",
+                    "They are famous for being extremely slow.",
+                    "They spend almost all of their time hanging upside down in trees.",
+                    "Algae and moss often grow on their fur, which helps them hide.",
+                    "A sloth's diet is mostly leaves, which are hard to digest.",
+                    "They only come down from their tree about once a week."
+                ]
+            },
+            {
+                topic: "Topic: The Titanic",
+                facts: [
+                    "The Titanic was the largest ship in the world in 1912.",
+                    "It was called 'unsinkable' by its builders.",
+                    "On its first-ever voyage, it hit an iceberg in the North Atlantic Ocean.",
+                    "The ship did not have enough lifeboats for everyone on board.",
+                    "More than 1,500 people died in the disaster.",
+                    "The wreck of the Titanic was found deep in the ocean in 1985."
+                ]
+            },
+            {
+                topic: "Topic: Spiders",
+                facts: [
+                    "Spiders are arachnids, not insects.",
+                    "They have eight legs, while insects have six.",
+                    "All spiders can produce silk.",
+                    "They use silk to build webs, wrap prey, or make egg sacs.",
+                    "Most spiders have venom to paralyze their prey.",
+                    "Despite what people think, only a very small number (less than 1%) are dangerous to humans."
+                ]
+            }
+        ];
+
+        const seniorFactSets = [
+            {
+                topic: "Topic: The Great Barrier Reef",
+                facts: [
+                    "The Great Barrier Reef is the world's largest coral reef system.",
+                    "It is located off the coast of Queensland, Australia.",
+                    "It is so large it can be seen from outer space.",
+                    "The reef is home to over 1,500 species of fish.",
+                    "It is under serious threat from climate change, which causes 'coral bleaching'.",
+                    "Scientists report that 50% of the coral has been lost in the last 30 years."
+                ]
+            },
+            {
+                topic: "Topic: The Printing Press",
+                facts: [
+                    "In 1440, Johannes Gutenberg invented the movable-type printing press.",
+                    "Before this, books were copied by hand, which was slow and expensive.",
+                    "The printing press allowed for the mass production of books.",
+                    "This meant knowledge and ideas could spread quickly across Europe.",
+                    "It played a key role in the Renaissance and the Scientific Revolution.",
+                    "The price of books dropped, allowing more people (not just the rich) to learn to read."
+                ]
+            },
+            {
+                topic: "Topic: The International Space Station (ISS)",
+                facts: [
+                    "The ISS is a large spacecraft that orbits Earth.",
+                    "It serves as a home and science laboratory for astronauts.",
+                    "It was built by a partnership of 15 different countries.",
+                    "The station travels at 17,500 miles per hour.",
+                    "Astronauts on the ISS see 16 sunrises and 16 sunsets every day.",
+                    "They conduct experiments in biology, physics, and astronomy."
+                ]
+            },
+            {
+                topic: "Topic: Shakespeare's Globe Theatre",
+                facts: [
+                    "The original Globe Theatre was built in London in 1599.",
+                    "It was the theatre where most of William Shakespeare's plays were first performed.",
+                    "It was an open-air theatre, meaning it had no roof in the center.",
+                    "Common people, called 'groundlings', paid one penny to stand and watch.",
+                    "The original theatre burned down in 1613 during a performance.",
+                    "A modern reconstruction now stands near the original site."
+                ]
+            },
+            {
+                topic: "Topic: The Human Brain",
+                facts: [
+                    "The adult human brain weighs about 3 pounds.",
+                    "It is composed of about 60% fat.",
+                    "The brain contains roughly 86 billion nerve cells called neurons.",
+                    "These neurons transmit information using electrical and chemical signals.",
+                    "The brain uses 20% of the body's total oxygen and calories.",
+                    "Your brain continues to form new connections and change throughout your life."
+                ]
+            },
+            {
+                topic: "Topic: Plate Tectonics",
+                facts: [
+                    "The Earth's outer shell is not one solid piece.",
+                    "It is made of giant, moving puzzle pieces called tectonic plates.",
+                    "These plates 'float' on the semi-molten rock of the mantle.",
+                    "The movement of these plates causes earthquakes, volcanoes, and tsunamis.",
+                    "There are seven major tectonic plates, including the Pacific Plate.",
+                    "The plates move very slowly, only about 1 to 2 inches per year."
+                ]
+            },
+            {
+                topic: "Topic: The Black Death",
+                facts: [
+                    "The Black Death was a devastating pandemic in the 14th century.",
+                    "It spread across Europe, Asia, and North Africa.",
+                    "It was caused by the bacterium *Yersinia pestis*.",
+                    "The plague was transmitted by fleas living on rats.",
+                    "It killed an estimated 75-200 million people.",
+                    "This single event dramatically changed the course of European history."
+                ]
+            },
+            {
+                topic: "Topic: The fall of the Berlin Wall",
+                facts: [
+                    "For 28 years (1961-1989), the Berlin Wall divided East and West Berlin.",
+                    "It was a concrete barrier built by East Germany (GDR).",
+                    "Its purpose was to stop East Germans from fleeing to the West.",
+                    "The wall symbolized the 'Iron Curtain' of the Cold War.",
+                    "On November 9, 1989, the East German government announced citizens could cross.",
+                    "This decision led to huge crowds, the wall's destruction, and the reunification of Germany."
+                ]
+            },
+            {
+                topic: "Topic: Deep-Sea Vents",
+                facts: [
+                    "Hydrothermal vents are fissures on the ocean floor.",
+                    "They release geothermally heated water, often exceeding 700°F (370°C).",
+                    "Despite the extreme temperature and pressure, they support entire ecosystems.",
+                    "These ecosystems are based on chemosynthesis, not photosynthesis.",
+                    "This means bacteria use chemicals (like hydrogen sulfide) for energy instead of sunlight.",
+                    "Creatures found here include giant tubeworms, blind shrimp, and crabs."
+                ]
+            },
+            {
+                topic: "Topic: The Voyager 1 Probe",
+                facts: [
+                    "Voyager 1 is a space probe launched by NASA in 1977.",
+                    "Its original mission was to study Jupiter and Saturn.",
+                    "It is the most distant man-made object from Earth.",
+                    "In 2012, it became the first spacecraft to enter interstellar space.",
+                    "It carries the 'Golden Record', a disc containing sounds and images from Earth.",
+                    "The probe is still transmitting data, though its power is expected to run out around 2025."
+                ]
+            }
+        ];
+
+        // --- Activity 8 Data (Vocab) ---
+        const juniorVocab = [
+            { word: "curious", meaning: "Eager to know or learn something.", example: "The <strong>curious</strong> cat carefully sniffed the new, blue armchair." },
+            { word: "enormous", meaning: "Very large in size; huge.", example: "We watched an <strong>enormous</strong> whale jump completely out of the water." },
+            { word: "ancient", meaning: "Belonging to the very distant past.", example: "My grandpa showed me an <strong>ancient</strong> coin from a country that no longer exists." },
+            { word: "drowsy", meaning: "Sleepy and half asleep.", example: "After playing all day, the <strong>drowsy</strong> puppy curled up for a nap." },
+            { word: "courageous", meaning: "Brave; not stopped by danger.", example: "A <strong>courageous</strong> firefighter ran into the building to save the family." },
+            { word: "baffled", meaning: "To be completely confused or puzzled.", example: "I was <strong>baffled</strong> by the magic trick." },
+            { word: "meek", meaning: "Quiet, gentle, and easily ordered around.", example: "The <strong>meek</strong> mouse quietly hid from the cat." },
+            { word: "jovial", meaning: "Cheerful and friendly.", example: "Our <strong>jovial</strong> neighbor always waves and says hello." },
+            { word: "rare", meaning: "Not seen or happening very often.", example: "We found a <strong>rare</strong> purple flower on our hike." },
+            { word: "generous", meaning: "Showing a readiness to give more of something, like money or time, than is expected.", example: "My <strong>generous</strong> friend shared his entire lunch with me." },
+            { word: "exhausted", meaning: "Extremely tired.", example: "After running the race, I felt completely <strong>exhausted</strong>." },
+            { word: "hilarious", meaning: "Extremely funny.", example: "My dad told a <strong>hilarious</strong> joke that made everyone laugh." }
+        ];
+        
+        const seniorVocab = [
+            { word: "ephemeral", meaning: "Lasting for a very short time.", example: "The artist loved watching the <strong>ephemeral</strong> patterns of sunlight on the water." },
+            { word: "ubiquitous", meaning: "Present or found everywhere.", example: "Once a rare luxury, smartphones are now <strong>ubiquitous</strong> in our daily lives." },
+            { word: "ambiguous", meaning: "Open to more than one interpretation; unclear.", example: "The politician gave an <strong>ambiguous</strong> answer, leaving everyone unsure of his true opinion." },
+            { word: "meticulous", meaning: "Showing great attention to detail; very careful and precise.", example: "My dad is <strong>meticulous</strong> when he builds models, ensuring every tiny piece is perfect." },
+            { word: "resilience", meaning: "The capacity to recover quickly from difficulties; toughness.", example: "Despite many setbacks, the community showed incredible <strong>resilience</strong> and rebuilt their town." },
+            { word: "benevolent", meaning: "Well-meaning and kindly.", example: "The <strong>benevolent</strong> queen was loved by all her subjects for her fairness." },
+            { word: "garrulous", meaning: "Excessively talkative, especially on trivial matters.", example: "My <strong>garrulous</strong> uncle told long stories about his fishing trips." },
+            { word: "pragmatic", meaning: "Dealing with things sensibly and realistically.", example: "Instead of panicking, she took a <strong>pragmatic</strong> approach to solving the problem." },
+            { word: "austere", meaning: "Severe or strict in manner; having no comforts or luxuries.", example: "The monk lived an <strong>austere</strong> life in a simple stone room." },
+            { word: "eloquent", meaning: "Fluent or persuasive in speaking or writing.", example: "Dr. King's <strong>eloquent</strong> speech inspired millions of people." },
+            { word: "anomaly", meaning: "Something that is different from what is standard, normal, or expected.", example: "The sudden snowstorm in July was a weather <strong>anomaly</strong>." },
+            { word: "caustic", meaning: "Sarcastic in a scathing and bitter way.", example: "His <strong>caustic</strong> remarks about her work were both unprofessional and hurtful." },
+            { word: "diligent", meaning: "Having or showing care and conscientiousness in one's work.", example: "The <strong>diligent</strong> student reviewed her notes every night for a week." }
+        ];
+        
+        // --- Activity 9 Data (Punctuation) ---
+        const juniorPunctuationErrors = [
+            "In the movie finding nemo a small clownfish gets lost. his dad, marlin, has to find him marlin is a very worried fish. He meets a blue fish named dory who has a bad memory dory says 'just keep swimming' They have a big adventure and see sharks turtles and jellyfish. Nemos tank friends also try to help him escape. its a great story about family and courage",
+            "The book charlottes web is about a pig named wilbur. wilbur is sad because he thinks hes going to be eaten. a kind spider named charlotte decides to help him. She spins words into her web like 'some pig' and 'terrific' This makes wilbur famous. charlottes plan works and wilbur is saved. its a lovely story about friendship",
+            "My favorite book series is harry potter. It follows a young wizard harry potter and his friends hermione granger and ron weasley. They all go to hogwarts school of witchcraft and wizardry. Harrys main enemy is lord voldemort a dark wizard. Harry learns he is the only one who can stop him. The books are full of magic adventure and fun.",
+            "in the movie toy story a cowboy doll named woody gets jealous. His owner andy gets a new toy a space ranger named buzz lightyear. Woody tries to hide buzz but they both get lost. They have to work together to get home. They meet the mean kid sid who likes to break toys. woody and buzz learn to be friends. andy is happy to find them.",
+            "the movie how to train your dragon is about a viking boy named hiccup. He lives on an island called berk. The vikings are afraid of dragons. Hiccup finds a hurt dragon a night fury and names him toothless. Instead of hurting him hiccup helps him. They become best friends. hiccup shows his village that dragons arent bad. people and dragons learn to live together.",
+            "i like the book where the wild things are. A boy named max wears his wolf suit. and makes mischief. His mom calls him 'wild thing' and sends him to his room. A forest grows in maxs room. He sails to an island. The wild things make him their king. but he gets lonely and goes home.",
+            "We are learning about ancient egypt. The pharaohs were the kings. They built giant pyramids as tombs. The most famous pyramids are in giza. Inside they put treasure and food. They also made mummies. a mummys body was wrapped in linen. its all very interesting.",
+            "our class pet is a hamster named squeaky. He lives in a big cage with tunnels. squeaky loves to run on his wheel at night. During the day he sleeps under the wood shavings. We take turns feeding him. his favorite food is sunflower seeds. hes the best class pet.",
+            "The movie inside out is very clever. It shows the emotions inside a girls head. Her name is riley. Her emotions are joy sadness anger fear and disgust. Joy is the leader. but sadness starts touching happy memories. joy and sadness get lost in rileys mind. They have to get back to headquarters. its a funny and smart movie.",
+            "I am reading a book about spies. The spy's name is alex. He has to find a secret code. The code is hidden in a museum. Bad guys are also looking for the code. Alex has cool gadgets like a watch that shoots a laser. i cant wait to see what happens next."
+        ];
+        
+        const seniorPunctuationErrors = [
+            "In the novel the hunger games katniss everdeen lives in dystopia. She volunteers for a deadly game to save her sister prim. Katniss and the other tribute peeta mellark have to fight other kids to the death. The games are run by the capitol a cruel government. Katniss says 'if we burn you burn with us' She becomes a symbol of rebellion. the book is a powerful story about survival and control.",
+            "The movie spider-man into the spider-verse is about miles morales. He gets bitten by a radioactive spider and becomes spider-man. He soon learns hes not the only one. He meets other spider-people from different dimensions including peter b parker and gwen stacy. They have to work together to stop the villain kingpin. Kingpin wants to break reality. Miles learns that 'anyone can wear the mask'",
+            "Shakespeare's play macbeth is a dark and tragic story. A general named macbeth meets three witches. They give him a prophecy that he will be king. Macbeth and his wife lady macbeth decide to kill king duncan. After he becomes king macbeth is haunted by guilt. Lady Macbeth says 'out damned spot' because she cant wash blood off her hands. The play shows how ambition can destroy people.",
+            "The lord of the rings by jrr tolkien is an epic fantasy. A hobbit named frodo baggins must destroy a powerful ring. He forms a fellowship with eight companions including gandalf the wizard and aragorn the ranger. Their goal is to take the ring to mordor. The ring's creator sauron wants it back. Gandalf tells frodo 'all we have to decide is what to do with the time that is given to us'",
+            "The novel '1984' by george orwell is set in a totalitarian state. The government known as big brother watches everyone. The main character winston smith works at the ministry of truth. his job is to rewrite history. He hates the party and secretly rebels. He writes 'down with big brother' in a diary. its a terrifying book about surveillance and freedom.",
+            "In 'a wrinkle in time' a girl named meg murry goes on a quest. She has to save her father from a dark planet. She travels with her brother charles wallace and her friend calvin. Three strange beings mrs whatsit mrs who and mrs which help them. They travel by 'tesseracting' which is folding space. megs greatest weapon is her love for her family.",
+            "The movie 'inception' is about a thief named dom cobb. He doesnt steal things he steals ideas. He does this by entering peoples dreams. Cobb gets a chance to go home. but first he must do the opposite plant an idea. His team has to go deep into many dream levels. The movie is confusing but amazing. people still debate the ending.",
+            "mary shelleys 'frankenstein' is a famous gothic novel. A scientist victor frankenstein creates a living being. from old body parts. He is horrified by his creation. and abandons it. The creature is intelligent but lonely. He gets angry at victor. and seeks revenge. The creature says 'I ought to be thy adam but I am rather the fallen angel'",
+            "The film 'parasite' from korea won many awards. It tells the story of the kim family. who are very poor. They slowly trick their way into working for the rich park family. The movie is funny at first. but it becomes very dark and violent. It explores themes of class warfare and social inequality. The director is bong joon-ho.",
+            "In 'the martian' an astronaut mark watney is left on mars. His crew thinks hes dead after a dust storm. Watney must use science. and his skills to survive. He figures out how to grow potatoes on mars. He says 'im going to have to science the... out of this'. NASA eventually realizes hes alive. and plans a risky rescue mission."
+        ];
+
+
+        // --- LOGIC TO GENERATE AND DISPLAY ACTIVITIES ---
+        // Each function can take an optional 'index'.
+        // If 'index' is provided, it loads a specific item (for weekly cycle).
+        // If 'index' is undefined, it loads a random item (for 'Generate' button).
+
+        function generateActivity1(index) {
+            let jIndex = (index !== undefined) ? index % juniorTenseParagraphs.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorTenseParagraphs.length : -1;
+            
+            document.getElementById('act1-junior').textContent = (jIndex > -1) ? juniorTenseParagraphs[jIndex] : getRandomItem(juniorTenseParagraphs);
+            document.getElementById('act1-senior').textContent = (sIndex > -1) ? seniorTenseParagraphs[sIndex] : getRandomItem(seniorTenseParagraphs);
+        }
+
+        function generateActivity2(index) {
+            document.getElementById('act2-junior').innerHTML = '';
+            document.getElementById('act2-senior').innerHTML = '';
+            
+            let juniorSentences;
+            let seniorSentences;
+
+            if (index !== undefined) {
+                // Get 5 sentences starting from the index, wrapping around
+                juniorSentences = [];
+                for (let i = 0; i < 5; i++) {
+                    juniorSentences.push(juniorVerbSentences[(index + i) % juniorVerbSentences.length]);
+                }
+                seniorSentences = [];
+                for (let i = 0; i < 5; i++) {
+                    seniorSentences.push(seniorVerbSentences[(index + i) % seniorVerbSentences.length]);
+                }
+            } else {
+                // Get random sentences
+                juniorSentences = getNRandomItems(juniorVerbSentences, 5);
+                seniorSentences = getNRandomItems(seniorVerbSentences, 5);
+            }
+
+            juniorSentences.forEach(sentence => {
+                 document.getElementById('act2-junior').innerHTML += `<li class="mb-2">${sentence[0]}</li>`;
+            });
+            seniorSentences.forEach(sentence => {
+                 document.getElementById('act2-senior').innerHTML += `<li class="mb-2">${sentence[0]}</li>`;
+            });
+        }
+
+        function generateActivity3(index) {
+            document.getElementById('act3-junior').innerHTML = '';
+            document.getElementById('act3-senior').innerHTML = '';
+            
+            let juniorSentences;
+            let seniorSentences;
+
+            if (index !== undefined) {
+                juniorSentences = [];
+                for (let i = 0; i < 5; i++) {
+                    juniorSentences.push(juniorBadStarts[(index + i) % juniorBadStarts.length]);
+                }
+                seniorSentences = [];
+                for (let i = 0; i < 5; i++) {
+                    seniorSentences.push(seniorBadStarts[(index + i) % seniorBadStarts.length]);
+                }
+            } else {
+                juniorSentences = getNRandomItems(juniorBadStarts, 5);
+                seniorSentences = getNRandomItems(seniorBadStarts, 5);
+            }
+            
+            juniorSentences.forEach(sentence => {
+                 document.getElementById('act3-junior').innerHTML += `<li class="mb-2">${sentence}</li>`;
+            });
+            seniorSentences.forEach(sentence => {
+                 document.getElementById('act3-senior').innerHTML += `<li class="mb-2">${sentence}</li>`;
+            });
+        }
+        
+        function generateActivity4(index) {
+            let jIndex = (index !== undefined) ? index % juniorStopWords.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorStopWords.length : -1;
+
+            const juniorSet = (jIndex > -1) ? juniorStopWords[jIndex] : getRandomItem(juniorStopWords);
+            const seniorSet = (sIndex > -1) ? seniorStopWords[sIndex] : getRandomItem(seniorStopWords);
+            
+            document.getElementById('act4-junior').innerHTML = juniorSet.map(s => `<li class="mb-2">${s}</li>`).join('');
+            document.getElementById('act4-senior').innerHTML = seniorSet.map(s => `<li class="mb-2">${s}</li>`).join('');
+        }
+
+        function generateActivity5(index) {
+            let jIndex = (index !== undefined) ? index % juniorPuzzles.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorPuzzles.length : -1;
+
+            document.getElementById('act5-junior').textContent = (jIndex > -1) ? juniorPuzzles[jIndex] : getRandomItem(juniorPuzzles);
+            document.getElementById('act5-senior').textContent = (sIndex > -1) ? seniorPuzzles[sIndex] : getRandomItem(seniorPuzzles);
+        }
+        
+        // Helper function for Activity 6
+        function createBalancedStarters(index) {
+             let starters;
+            if (index !== undefined) {
+                // Get starters based on index
+                starters = [
+                    openingStarters[index % openingStarters.length],
+                    openingStarters[(index + 1) % openingStarters.length],
+                    explorationStarters[index % explorationStarters.length],
+                    explorationStarters[(index + 1) % explorationStarters.length],
+                    insightStarters[index % insightStarters.length],
+                    insightStarters[(index + 1) % insightStarters.length],
+                    conversationalStarters[index % conversationalStarters.length],
+                    conversationalStarters[(index + 1) % conversationalStarters.length]
+                ];
+            } else {
+                // Get random starters
+                starters = [
+                    ...getNRandomItems(openingStarters, 2),
+                    ...getNRandomItems(explorationStarters, 2),
+                    ...getNRandomItems(insightStarters, 2),
+                    ...getNRandomItems(conversationalStarters, 2)
+                ];
+            }
+            const finalStarters = shuffleArray(starters); // Still shuffle them so the order isn't predictable
+            return finalStarters.map(s => `<li>${s}</li>`).join('');
+        }
+
+        function generateActivity6(index) {
+            let jIndex = (index !== undefined) ? index % juniorPersuasiveTopics.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorPersuasiveTopics.length : -1;
+
+            document.getElementById('act6-junior-topic').textContent = (jIndex > -1) ? juniorPersuasiveTopics[jIndex] : getRandomItem(juniorPersuasiveTopics);
+            document.getElementById('act6-senior-topic').textContent = (sIndex > -1) ? seniorPersuasiveTopics[sIndex] : getRandomItem(seniorPersuasiveTopics);
+            
+            // Generate starters for Juniors
+            document.getElementById('act6-junior-starters').innerHTML = createBalancedStarters(index);
+            
+            // Generate a different set of starters for Seniors, offset the index
+            let seniorIndex = (index !== undefined) ? index + 1 : undefined;
+            document.getElementById('act6-senior-starters').innerHTML = createBalancedStarters(seniorIndex);
+        }
+
+        function generateActivity7(index) {
+            let jIndex = (index !== undefined) ? index % juniorFactSets.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorFactSets.length : -1;
+
+            const juniorSet = (jIndex > -1) ? juniorFactSets[jIndex] : getRandomItem(juniorFactSets);
+            const seniorSet = (sIndex > -1) ? seniorFactSets[sIndex] : getRandomItem(seniorFactSets);
+
+            document.getElementById('act7-junior-topic').textContent = juniorSet.topic;
+            document.getElementById('act7-senior-topic').textContent = seniorSet.topic;
+            document.getElementById('act7-junior-facts').innerHTML = juniorSet.facts.map(f => `<li>${f}</li>`).join('');
+            document.getElementById('act7-senior-facts').innerHTML = seniorSet.facts.map(f => `<li>${f}</li>`).join('');
+        }
+        
+        function generateActivity8(index) {
+            let juniorWords;
+            let seniorWords;
+            
+            if (index !== undefined) {
+                juniorWords = [
+                    juniorVocab[index % juniorVocab.length],
+                    juniorVocab[(index + 1) % juniorVocab.length]
+                ];
+                seniorWords = [
+                    seniorVocab[index % seniorVocab.length],
+                    seniorVocab[(index + 1) % seniorVocab.length]
+                ];
+            } else {
+                juniorWords = getNRandomItems(juniorVocab, 2);
+                seniorWords = getNRandomItems(seniorVocab, 2);
+            }
+
+            document.getElementById('act8-junior').innerHTML = juniorWords.map(wordObj => `
+                <div>
+                    <h4 class="text-2xl font-bold text-blue-900">${wordObj.word}</h4>
+                    <p class="text-gray-700 italic">${wordObj.meaning}</p>
+                    <p class="text-gray-800 mt-1"><strong>Example:</strong> ${wordObj.example}</p>
+                </div>
+            `).join('');
+            
+            document.getElementById('act8-senior').innerHTML = seniorWords.map(wordObj => `
+                <div>
+                    <h4 class="text-2xl font-bold text-indigo-900">${wordObj.word}</h4>
+                    <p class="text-gray-700 italic">${wordObj.meaning}</p>
+                    <p class="text-gray-800 mt-1"><strong>Example:</strong> ${wordObj.example}</p>
+                </div>
+            `).join('');
+        }
+        
+        function generateActivity9(index) {
+            let jIndex = (index !== undefined) ? index % juniorPunctuationErrors.length : -1;
+            let sIndex = (index !== undefined) ? index % seniorPunctuationErrors.length : -1;
+            
+            document.getElementById('act9-junior').textContent = (jIndex > -1) ? juniorPunctuationErrors[jIndex] : getRandomItem(juniorPunctuationErrors);
+            document.getElementById('act9-senior').textContent = (sIndex > -1) ? seniorPunctuationErrors[sIndex] : getRandomItem(seniorPunctuationErrors);
+        }
+
+        // --- Master Functions ---
+
+        // Loads a specific set of content based on an index
+        function loadWeeklyContent(index) {
+            generateActivity1(index);
+            generateActivity2(index);
+            generateActivity3(index);
+            generateActivity4(index);
+            generateActivity5(index);
+            generateActivity6(index);
+            generateActivity7(index);
+            generateActivity8(index);
+            generateActivity9(index);
+        }
+        
+        // Loads completely random content
+        function generateAllActivities() {
+            generateActivity1(); // No index = random
+            generateActivity2(); // No index = random
+            generateActivity3(); // No index = random
+            generateActivity4(); // No index = random
+            generateActivity5(); // No index = random
+            generateActivity6(); // No index = random
+            generateActivity7(); // No index = random
+            generateActivity8(); // No index = random
+            generateActivity9(); // No index = random
+        }
+
+        // --- TAB SWITCHING LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            function switchTab(tabNumber) {
+                // Set button active state
+                tabButtons.forEach(button => {
+                    if (button.dataset.tab == tabNumber) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+
+                // Show active panel
+                tabPanels.forEach(panel => {
+                    if (panel.id == `tab-panel-${tabNumber}`) {
+                        panel.classList.add('active');
+                    } else {
+                        panel.classList.remove('active');
+                    }
+                });
+            }
+
+            // Add click listeners to buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    switchTab(button.dataset.tab);
+                });
+            });
+
+            // Add click listener to main generate button
+            // This button will *override* the weekly content with random content
+            document.getElementById('generate-button').addEventListener('click', generateAllActivities);
+
+            // --- INITIALIZE ---
+            // Set default tab to 1
+            switchTab(1);
+            
+            // --- Weekly Content Logic ---
+            const [currentYear, currentWeek] = getWeekNumber(new Date());
+            const lastVisitedWeek = localStorage.getItem('writingToolLastWeek');
+            const currentWeekString = `${currentYear}-${currentWeek}`;
+            let contentCycleIndex = parseInt(localStorage.getItem('writingToolCycleIndex') || '0', 10);
+            
+            // We'll use 10 as the cycle length, as most banks have at least 10 items.
+            const cycleLength = 10; 
+
+            if (lastVisitedWeek !== currentWeekString) {
+                // It's a new week! Increment the cycle index.
+                contentCycleIndex = (contentCycleIndex + 1) % cycleLength; 
+                localStorage.setItem('writingToolCycleIndex', contentCycleIndex);
+                localStorage.setItem('writingToolLastWeek', currentWeekString);
+            }
+            
+            // Load the content for the current cycle
+            loadWeeklyContent(contentCycleIndex);
+        });
+
+    </script>
+</body>
+</html>
+
